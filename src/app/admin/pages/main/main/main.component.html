@@ -1,0 +1,31 @@
+<div class="row my-3">
+  <div class="col-8">
+    <h1 class="text-uppercase">Ghi Chú</h1>
+  </div>
+  <div class="col-4 my-2">
+    <button class="btn btn-success" (click)="isButtonAdd = !isButtonAdd">Thêm Ghi Chú</button>
+  </div>
+</div>
+<div class="row" *ngIf="isButtonAdd">
+  <app-add (add)="AddNew($event)"></app-add>
+</div>
+<div class="row">
+  <div class="col-6 my-3" *ngFor="let i of listGhiChu; let m = index">
+    <div class="card text-dark p-3">
+      <div class="card-body">
+        <h5 class="card-title text-center text-capitalize">{{ i.title }}</h5>
+        <hr>
+        <span class="text-muted fw-lighter fst-italic">Date: {{ i.Date | date: 'dd/MM/YYYY'}}</span>
+        <hr>
+        <p class="card-text py-3">{{ i.NoiDung }}</p>
+      </div>
+      <div class="card-footer">
+        <button class="btn btn-outline-success mx-4" (click)="Sua(m)">Sửa</button>
+        <button class="btn btn-outline-danger mx-4" (click)="Xoa(m)">Xóa</button>
+      </div>
+    </div>
+  </div>
+</div>
+<app-edit *ngIf="isButtonSua" (btnsua)="btnsua($event)" [ButtonSua]="isButtonSua"
+[Pos_notes]="positionNotes" [listGhiChu]="listGhiChu" (Note_edited)="SuaNotes($event)"></app-edit>
+
